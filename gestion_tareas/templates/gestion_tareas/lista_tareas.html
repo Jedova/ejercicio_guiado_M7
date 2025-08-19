@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lista de tareas</title>
+</head>
+<body>
+  <h1>Lista de tareas</h1>
+
+  <ul>
+    {% for tarea in tareas %}
+      <li>{{ tarea.titulo }}</li>
+    {% empty %}
+      <li>Sin tareas registradas</li>
+    {% endfor %}
+  </ul>
+
+  <p><a href="{% url 'nueva_tarea' %}">Nueva tarea</a></p>
+</body>
+</html>
