@@ -1,21 +1,21 @@
+# gestion_tareas/views.py
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Tarea
-from .form import TareaForm
+from .forms import TareaForm  
 
 def lista_tareas(request):
     tareas = Tarea.objects.all()
-    return render(request, 'gestion_tareas/lista_tareas.html', {'tareas': tareas})
+    return render(request, "gestion_tareas/lista_tareas.html", {"tareas": tareas})
 
 def nueva_tarea(request):
     if request.method == "POST":
         form = TareaForm(request.POST)
-    if form.is_valid():
-        form.save()
-        return redirect('lista_tareas')
-
+        if form.is_valid():
+            form.save()
+            return redirect("lista_tareas")
     else:
         form = TareaForm()
-    return render(request, 'gestion_tareas/editar_tarea.html', {'form':form})
+    return render(request, "gestion_tareas/nueva_tarea.html", {"form": form})
 
 def editar_tarea(request, pk):
     tarea = get_object_or_404(Tarea, pk=pk)
